@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col s12 m6">
+        <h3>Estórias de Usuários</h3>
+    </div>
+</div>
+<div class="row" *ngFor="let estoria of estoriaList">
+    <div class="col s12 m12">
+        <div class="card">
+            <div class="card-content left-align">
+                <div class="right-align">
+                    <a class="waves-effect waves-light btn red darken-1" (click)="finalizarHistoria(estoria)"><i class="material-icons left">done</i>Finalizar</a>
+                </div>
+                <p class="card-title">{{estoria.nome | uppercase }}</p>
+                <div class="col s12 m6 left-align">
+                    <p>{{estoria.descricao}}</p>
+                </div>
+                <div class="col s12 m6 right-align">
+                    <p>{{estoria.pontos}} pontos</p>
+                </div>
+                <div class=" left-align">
+                    <a class="waves-effect waves-light btn green darken-3" (click)="visualizarTarefas(estoria)"><i class="material-icons left">visibility</i>Tarefas</a><br/>
+                </div>
+
+                <div *ngIf="estoria.isVisualizarTarefas">
+                    <div *ngIf="estoria.tarefas.length < 0">
+                        <h6>Nenhuma tarefa adicionada</h6>
+                    </div>
+                     <div *ngIf="estoria.tarefas.length > 0" class="center-align">
+                        <h5>Lista de tarefas</h5>
+                    </div>
+                    <div>
+                        <ul>
+                            <li *ngFor="let tarefa of estoria.tarefas">
+                                <h5>{{ tarefa.nome }}: {{ tarefa.descricao }}</h5>
+                            </li>
+                        </ul>
+                        <div class="row">
+                            <div class="input-field col s12 m6 l6">
+                                <input id="novaTarefa" type="text" name="novaTarefa" [(ngModel)]="tarefaAtual.nome">
+                                <label for="novaTarefa">Nova tarefa</label>
+                            </div>
+
+                            <div class="input-field col s12 m6 l6">
+                                <input id="descricao" type="text" name="descricao" [(ngModel)]="tarefaAtual.descricao">
+                                <label for="descricao">Descrição</label>
+                            </div>
+                            <div class="right-align row">
+                                <button class="btn waves-effect waves-light green darken-3" (click)="adicionarTarefas(estoria)"> <i class="material-icons left">save</i> Adicionar tarefa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
